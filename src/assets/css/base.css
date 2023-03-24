@@ -1,0 +1,6 @@
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+  color: var(--base_grey);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

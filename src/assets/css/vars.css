@@ -1,0 +1,10 @@
+/* Цвета */
+:root {
+  /* базовые цвета */
+  --base_grey: #424242;
+  --base_white: #ffffff;
+
+  /* дополнительные цвета */
+  --additional_danger: #EB1717;
+
+}
