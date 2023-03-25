@@ -6,23 +6,18 @@
     "form results"
     "favorites results";
 }
+
 .content__form-card {
   grid-area: form;
 }
-.content__search-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.submit-button__wrapper {
-  margin-top: 16px;
-}
+
 .content__favorites {
   grid-area: favorites;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
+
 .favorites__title {
   margin: 0;
   font-weight: 500;
@@ -37,19 +32,11 @@
   padding: 0;
   list-style: none;
 }
-.favorites-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.content__results {
-  grid-area: results;
-}
 .radio {
   display: none;
 }
 .filterButton {
+  cursor: pointer;
   user-select: none;
   box-sizing: border-box;
   padding: 4px 8px;
@@ -83,3 +70,14 @@
   background: url('@/assets/icons/arrows-active.svg') center no-repeat;
   transform: rotate(180deg);
 }
+
+.favorites-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.content__results {
+  grid-area: results;
+}
+

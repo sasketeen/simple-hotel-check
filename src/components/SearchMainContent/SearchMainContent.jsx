@@ -3,6 +3,7 @@ import SearchForm from "@c/Forms/SearchForm/SearchForm";
 import "./SearchMainContent.css";
 import { useEffect, useState } from "react";
 import { getCurrentDate } from "@/utils/getCurrentDate";
+import HotelCard from "../HotelCard/HotelCard";
 
 export default function SearchMainContent() {
 
@@ -30,9 +31,6 @@ export default function SearchMainContent() {
     setSortMethod(event.target.value);
   };
 
-  const handleDate = (event) => {
-    console.log(event.target.value)
-  }
 
   useEffect(() => {
     setSortedHotels(hotels.slice());
@@ -99,6 +97,7 @@ export default function SearchMainContent() {
               ></div>
             </label>
           </li>
+
           <li>
             <input
               className="radio"
@@ -125,9 +124,10 @@ export default function SearchMainContent() {
           </li>
         </ul>
 
-        <ul className="favorites-list">{hotelsCards}</ul>
+        <ul className="favorites-list"></ul>
       </Card>
-      <Card className="content__results"></Card>
+
+      <Card className="content__results"><HotelCard></HotelCard></Card>
     </div>
   );
 }

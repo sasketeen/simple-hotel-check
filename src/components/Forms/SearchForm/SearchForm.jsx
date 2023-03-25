@@ -1,10 +1,11 @@
 import Input from "@/ui/Input/Input";
 import MainButton from "@/ui/MainButton/MainButton";
+import './SearchForm.css'
 import { getCurrentDate } from "@/utils/getCurrentDate";
 
 export default function SearchForm({city, date, duration}) {
   return (
-    <form noValidate className="content__search-form" aria-label="Поиск отелей">
+    <form noValidate className="search-form" aria-label="Поиск отелей">
       <Input id="location" label="Локация" value={city} labelBold />
       <Input
         id="start-date"

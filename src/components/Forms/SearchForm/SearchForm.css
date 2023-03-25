@@ -1,0 +1,8 @@
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.submit-button__wrapper {
+  margin-top: 16px;
+}
