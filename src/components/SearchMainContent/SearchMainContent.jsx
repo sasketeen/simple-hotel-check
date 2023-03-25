@@ -7,9 +7,81 @@ import HotelCard from "../HotelCard/HotelCard";
 
 export default function SearchMainContent() {
   const [hotels, setHotels] = useState([
-    { name: 1, _id: 10, price: 3, rating: 1 },
-    { name: 2, _id: 21, price: 6, rating: 2 },
-    { name: 3, _id: 332, price: 1, rating: 3 },
+    {
+      location: {
+        country: "Russia",
+        geo: {
+          lon: 37.617508,
+          lat: 55.752041,
+        },
+        state: null,
+        name: "Moscow",
+      },
+      priceAvg: 60897.74,
+      pricePercentile: {
+        3: 28863.56,
+        10: 28863.56,
+        35: 47805.27,
+        50: 59531.09,
+        75: 65435,
+        99: 120128.17,
+      },
+      hotelName: "Mercure Arbat Moscow",
+      stars: 2,
+      locationId: 12153,
+      hotelId: 333561,
+      priceFrom: 23.56,
+    },
+    {
+      location: {
+        country: "Russia",
+        geo: {
+          lon: 37.617508,
+          lat: 55.752041,
+        },
+        state: null,
+        name: "Moscow",
+      },
+      priceAvg: 60897.74,
+      pricePercentile: {
+        3: 28863.56,
+        10: 28863.56,
+        35: 47805.27,
+        50: 59531.09,
+        75: 65435,
+        99: 120128.17,
+      },
+      hotelName: "Mercure Arbat Moscow",
+      stars: 0,
+      locationId: 12153,
+      hotelId: 333562,
+      priceFrom: 283.56,
+    },
+    {
+      location: {
+        country: "Russia",
+        geo: {
+          lon: 37.617508,
+          lat: 55.752041,
+        },
+        state: null,
+        name: "Moscow",
+      },
+      priceAvg: 60897.74,
+      pricePercentile: {
+        3: 28863.56,
+        10: 28863.56,
+        35: 47805.27,
+        50: 59531.09,
+        75: 65435,
+        99: 120128.17,
+      },
+      hotelName: "Mercure Arbat Moscow",
+      stars: 5,
+      locationId: 12153,
+      hotelId: 333563,
+      priceFrom: 2883.56,
+    },
   ]);
 
   const [sortedHotels, setSortedHotels] = useState([]);
@@ -31,33 +103,39 @@ export default function SearchMainContent() {
   };
 
   useEffect(() => {
-    setSortedHotels(hotels.slice());
     if (sortMethod === "byPrice") {
       if (sortAscending)
         setSortedHotels(
-          [...hotels].sort((a, b) => (a.price >= b.price ? 1 : -1))
+          [...hotels].sort((a, b) => (a.priceFrom>= b.priceFrom ? 1 : -1))
         );
       else
         setSortedHotels(
-          [...hotels].sort((a, b) => (a.price <= b.price ? 1 : -1))
+          [...hotels].sort((a, b) => (a.priceFrom <= b.priceFrom ? 1 : -1))
         );
     }
     if (sortMethod === "byRating") {
       if (sortAscending)
         setSortedHotels(
-          [...hotels].sort((a, b) => (a.rating >= b.rating ? 1 : -1))
+          [...hotels].sort((a, b) => (a.stars >= b.stars ? 1 : -1))
         );
       else
         setSortedHotels(
-          [...hotels].sort((a, b) => (a.rating <= b.rating ? 1 : -1))
+          [...hotels].sort((a, b) => (a.stars <= b.stars ? 1 : -1))
         );
     }
   }, [sortMethod, sortAscending, hotels]);
 
   const hotelsCards = sortedHotels.map((hotel) => {
     return (
-      <li key={hotel._id}>
-        <div>{hotel.name}</div>
+      <li key={hotel.hotelId}>
+        <HotelCard
+          name={hotel.hotelName}
+          date={getPrettyCurrentDate()}
+          duration="20"
+          rating={hotel.stars}
+          price={hotel.priceFrom}
+          noimage
+        ></HotelCard>
       </li>
     );
   });
@@ -122,7 +200,7 @@ export default function SearchMainContent() {
           </li>
         </ul>
 
-        <ul className="favorites-list"></ul>
+        <ul className="favorites-list">{hotelsCards}</ul>
       </Card>
 
       <Card className="content__results">

@@ -4,8 +4,8 @@
   display: grid;
   grid-template-columns: min-content 1fr min-content;
   grid-template-areas:
-  "img name button"
-  "img dates price"
+  "img heading heading"
+  "img dates dates"
   "img rating price";
 }
 
@@ -22,16 +22,49 @@
   border-radius: 50%;
 }
 
-/* название отеля */
+/* Заголовок карточки */
+.hotel-card__heading {
+  grid-area: heading;
+  display: flex;
+  justify-content: space-between;
+}
 
 .hotel-card__title {
-  grid-area: name;
   margin: 0;
   font-weight: 300;
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.408px;
   color: var(--base_grey);
+}
+
+.hotel-card__button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hotel-card__like {
+  cursor: pointer;
+  width: 21px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.like-icon path {
+  transition: all .3s;
+}
+
+.like-icon:hover path {
+  fill: #EBEBEB;
+}
+
+.hotel-card__like_active .like-icon path{
+  fill: #E55858;
+  stroke: #E55858;
 }
 
 /* даты заезда */
@@ -64,38 +97,6 @@
 .hotel-card__rating-wrapper {
   grid-area: rating;
   margin-top: 4px;
-}
-
-/* лайк */
-
-.hotel-card__button-wrapper {
-  grid-area: button;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.hotel-card__like {
-  cursor: pointer;
-  width: 21px;
-  height: 18px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-}
-
-.like-icon path {
-  transition: all .3s;
-}
-
-.like-icon:hover path {
-  fill: #EBEBEB;
-}
-
-.hotel-card__like_active .like-icon path{
-  fill: #E55858;
-  stroke: #E55858;
 }
 
 /* цена за номер */
