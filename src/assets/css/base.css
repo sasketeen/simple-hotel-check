@@ -3,4 +3,16 @@ body {
   color: var(--base_grey);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+}
+ #root {
+  /* max-width: 1440px; */
+  min-width: 400px;
+  margin: 0 auto;
+ }
+
+ @supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
 }

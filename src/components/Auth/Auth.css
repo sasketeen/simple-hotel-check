@@ -1,0 +1,48 @@
+.auth-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: url("@/assets/images/auth-background.jpg") center/cover no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-layout::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+
+  /* исправление бага с ресайзом размытия при изменении размера окна браузера
+   https://stackoverflow.com/questions/75543160/backdrop-filter-blur-not-resizing-when-changing-window-size
+  */
+  filter: blur(0);
+  backdrop-filter: blur(4px);
+}
+
+.auth-card {
+  max-width: 409px;
+}
+
+.auth-card__title {
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.auth-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.submit-button-wrapper {
+  width: 100%;
+  padding-top: 8px;
+}
