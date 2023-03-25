@@ -1,9 +1,8 @@
-import Card from "../Card/Card";
-import Input from "@/ui/Input/Input";
-import MainButton from "@/ui/MainButton/MainButton";
+import Card from "@c/Card/Card";
+import SearchForm from "@c/Forms/SearchForm/SearchForm";
 import "./SearchMainContent.css";
 import { useEffect, useState } from "react";
-import { getCurrentDate } from "../../utils/getCurrentDate";
+import { getCurrentDate } from "@/utils/getCurrentDate";
 
 export default function SearchMainContent() {
 
@@ -21,6 +20,7 @@ export default function SearchMainContent() {
   const [city, setCity] = useState('Москва')
   const [date, setDate] = useState(getCurrentDate());
   const [duration, setDuration] = useState(1);
+
   const togleSortAscending = (event) => {
     if (event.currentTarget.previousSibling.checked)
       setSortAscending(!sortAscending);
@@ -69,27 +69,7 @@ export default function SearchMainContent() {
   return (
     <div className="content">
       <Card className="content__form-card">
-        <form
-          noValidate
-          className="content__search-form"
-          aria-label="Поиск отелей"
-        >
-          <Input id="location" label="Локация" value={city} labelBold />
-          <Input id="start-date" type="date" min={getCurrentDate()} value={date} label="Дата заселения" labelBold onChange={handleDate}/>
-          <Input
-            value={duration}
-            id="duration"
-            type="number"
-            step="1"
-            min="1"
-            pattern="^[ 0-9]+$"
-            label="Количество дней"
-            labelBold
-          />
-          <div className="submit-button__wrapper">
-            <MainButton type="submit">Найти</MainButton>
-          </div>
-        </form>
+        <SearchForm city={city} date={date} duration={duration}></SearchForm>
       </Card>
       <Card className="content__favorites favorites">
         <h2 className="favorites__title">Избранное</h2>
