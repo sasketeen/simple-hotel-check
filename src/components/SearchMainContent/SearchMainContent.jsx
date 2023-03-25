@@ -2,11 +2,10 @@ import Card from "@c/Card/Card";
 import SearchForm from "@c/Forms/SearchForm/SearchForm";
 import "./SearchMainContent.css";
 import { useEffect, useState } from "react";
-import { getCurrentDate } from "@/utils/getCurrentDate";
+import { getCurrentDate, getPrettyCurrentDate } from "@/utils/getCurrentDate";
 import HotelCard from "../HotelCard/HotelCard";
 
 export default function SearchMainContent() {
-
   const [hotels, setHotels] = useState([
     { name: 1, _id: 10, price: 3, rating: 1 },
     { name: 2, _id: 21, price: 6, rating: 2 },
@@ -18,7 +17,7 @@ export default function SearchMainContent() {
   const [sortAscending, setSortAscending] = useState(true);
   const [sortMethod, setSortMethod] = useState("byRating");
 
-  const [city, setCity] = useState('Москва')
+  const [city, setCity] = useState("Москва");
   const [date, setDate] = useState(getCurrentDate());
   const [duration, setDuration] = useState(1);
 
@@ -30,7 +29,6 @@ export default function SearchMainContent() {
   const togleMethod = (event) => {
     setSortMethod(event.target.value);
   };
-
 
   useEffect(() => {
     setSortedHotels(hotels.slice());
@@ -127,7 +125,15 @@ export default function SearchMainContent() {
         <ul className="favorites-list"></ul>
       </Card>
 
-      <Card className="content__results"><HotelCard></HotelCard></Card>
+      <Card className="content__results">
+        <HotelCard
+          name="AvadaCedavra"
+          date={getPrettyCurrentDate()}
+          duration="20"
+          rating="1"
+          price="4500"
+        ></HotelCard>
+      </Card>
     </div>
   );
 }

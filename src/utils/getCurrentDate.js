@@ -1,3 +1,7 @@
+/**
+ * Функция форматирования даты
+ * @returns дату в формате YYYY.MM.DD
+ */
 export const getCurrentDate = () => new Date().toLocaleString('ru', {
   timeZone: 'Europe/Moscow',
   year: 'numeric',
@@ -5,6 +9,10 @@ export const getCurrentDate = () => new Date().toLocaleString('ru', {
   day: 'numeric',
 }).split('.').reverse().join('-')
 
+/**
+ * Функция форматирования даты
+ * @returns дату в формате DD month YYYY
+ */
 export const getPrettyCurrentDate = () => new Date().toLocaleString('ru', {
   timeZone: 'Europe/Moscow',
   year: 'numeric',

@@ -1,24 +1,40 @@
 import Rating from "@c/Rating/Rating";
 import house from "@/assets/icons/house.svg";
 import "./HotelCard.css";
-import { getPrettyCurrentDate } from "../../utils/getCurrentDate";
+import { declineWord } from "@/utils/declineWord";
 
-export default function HotelCard() {
+export default function HotelCard({
+  name,
+  date,
+  duration,
+  rating,
+  price,
+  noimage,
+}) {
   return (
     <div className="hotel-card">
-      <div className="hotel-card__img-wrapper">
-        <img className="hotel-card__img" src={house} alt="Изображение отеля" />
-      </div>
+      {!noimage && (
+        <div className="hotel-card__img-wrapper">
+          <img
+            className="hotel-card__img"
+            src={house}
+            alt="Изображение отеля"
+          />
+        </div>
+      )}
 
-      <h3 className="hotel-card__title">GrandeFinale</h3>
+      <h3 className="hotel-card__title">{name}</h3>
 
       <div className="hotel-card__date-wrapper">
-        <span className="hotel-card__date">{getPrettyCurrentDate()}</span>
-        <span className="hotel-card__duration">1 день</span>
+        <span className="hotel-card__date">{date}</span>
+        <span className="hotel-card__duration">{`${duration} ${declineWord(
+          duration,
+          ["день", "дня", "дней"]
+        )}`}</span>
       </div>
 
       <div className="hotel-card__rating-wrapper">
-        <Rating rating={3}></Rating>
+        <Rating rating={rating}></Rating>
       </div>
 
       <div className="hotel-card__button-wrapper">
@@ -37,7 +53,7 @@ export default function HotelCard() {
 
       <div className="hotel-card____price-wrapper">
         <span className="hotel-card__price-title">Price:</span>
-        <span className="hotel-card__price">{1}&#8381;</span>
+        <span className="hotel-card__price">{price}&nbsp;&#8381;</span>
       </div>
     </div>
   );
