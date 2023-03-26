@@ -1,9 +1,9 @@
 import Input from "@/ui/Input/Input";
 import MainButton from "@/ui/MainButton/MainButton";
-import './SearchForm.css'
+import "./SearchForm.css";
 import { getCurrentDate } from "@/utils/getCurrentDate";
 
-export default function SearchForm({city, date, duration}) {
+export default function SearchForm({ city, date, duration }) {
   return (
     <form noValidate className="search-form" aria-label="Поиск отелей">
       <Input id="location" label="Локация" value={city} labelBold />
@@ -25,6 +25,7 @@ export default function SearchForm({city, date, duration}) {
         label="Количество дней"
         labelBold
       />
+
       <div className="submit-button__wrapper">
         <MainButton type="submit">Найти</MainButton>
       </div>

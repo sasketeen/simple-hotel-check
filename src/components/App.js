@@ -7,11 +7,11 @@ function App() {
     <Routes>
       <Route
         path="auth"
-        element={<Auth/>}
+        element={<Auth />}
       />
       <Route
         path="/"
-        element={<Search/>}
+        element={<Search />}
       />
     </Routes>
   );

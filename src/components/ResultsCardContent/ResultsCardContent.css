@@ -1,0 +1,69 @@
+.results__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 48px;
+}
+
+.heading__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 38px;
+  position: relative;
+}
+
+.heading__title::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 9px);
+  right: -30px;
+  width: 10px;
+  height: 18px;
+  background: url("@/assets/icons/right-arrow.svg") center/contain no-repeat;
+}
+
+.results__city {
+  margin: 0;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 38px;
+}
+
+.results__date {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.favorites-info-wrapper {
+  margin: 28px 0 12px;
+}
+
+.favorites-info {
+  margin: 0;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+}
+
+.favorites-count {
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.card-list__item {
+  padding: 16px 16px 16px 0;
+  border-bottom: 1px solid rgba(135, 135, 135, 0.2);
+}
+
+.card-list__item:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}

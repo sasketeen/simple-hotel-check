@@ -1,14 +1,11 @@
-import Header from '@c/Header/Header';
-import './PageLayout.css'
+import Header from "@c/Header/Header";
+import "./PageLayout.css";
 
-export default function PageLayout({children}) {
-
-  return(
+export default function PageLayout({ children }) {
+  return (
     <>
-    <Header></Header>
-    <main className='main'>
-      {children}
-    </main>
+      <Header></Header>
+      <main className="main">{children}</main>
     </>
-  )
+  );
 }
