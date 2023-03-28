@@ -1,29 +1,59 @@
 import Input from "@/ui/Input/Input";
 import MainButton from "@/ui/MainButton/MainButton";
-import "./SearchForm.css";
-import { getCurrentDate } from "@/utils/getCurrentDate";
 
-export default function SearchForm({ city, date, duration }) {
+import { getCurrentDate } from "@/utils/getCurrentDate";
+import useForm from "@/hooks/useForm";
+
+import "./SearchForm.css";
+
+export default function SearchForm() {
+  const { values, handleChange } = useForm({
+    location: "Москва",
+    date: getCurrentDate(),
+    duration: 1,
+  });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if(event.target.checkValidity()) console.log(values);
+  }
   return (
-    <form noValidate className="search-form" aria-label="Поиск отелей">
-      <Input id="location" label="Локация" value={city} labelBold />
+    <form noValidate className="search-form" aria-label="Поиск отелей" onSubmit={handleSubmit}>
       <Input
-        id="start-date"
-        type="date"
-        min={getCurrentDate()}
-        value={date}
-        label="Дата заселения"
+        value={values.location}
+        label="Локация"
+        id="location"
+        required
         labelBold
+        onChange={(event) => {
+          handleChange(event);
+        }}
       />
       <Input
-        value={duration}
+        value={values.date}
+        label="Дата заселения"
+        id="date"
+        type="date"
+        min={getCurrentDate()}
+        required
+        labelBold
+        onChange={(event) => {
+          handleChange(event);
+        }}
+      />
+      <Input
+        value={values.duration}
+        label="Количество дней"
         id="duration"
         type="number"
         step="1"
         min="1"
+        required
         pattern="^[ 0-9]+$"
-        label="Количество дней"
         labelBold
+        onChange={(event) => {
+          handleChange(event);
+        }}
       />
 
       <div className="submit-button__wrapper">

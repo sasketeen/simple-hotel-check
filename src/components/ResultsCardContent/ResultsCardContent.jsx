@@ -1,10 +1,12 @@
 import HotelCard from "@c/HotelCard/HotelCard";
 import HotelsCardsList from "@c/HotelsCardsList/HotelsCardsList";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 
 import { getCurrentDate, getPrettyCurrentDate } from "@/utils/getCurrentDate";
 import { declineWord } from "@/utils/declineWord";
 
+import "@splidejs/react-splide/css";
 import "./ResultsCardContent.css";
 import img1 from "@/assets/images/City-img1.png";
 
@@ -17,6 +19,12 @@ export default function ResultsCardContent({ hotels, city }) {
     arrows: false,
     gap: "12px",
     autoWidth: true,
+    autoScroll: {
+      pauseOnHover: true,
+      pauseOnFocus: true,
+      rewind: false,
+      speed: 0.3
+    }
   };
 
   const hotelsCards = hotels.map((hotel) => {
@@ -45,7 +53,7 @@ export default function ResultsCardContent({ hotels, city }) {
         </time>
       </div>
 
-      <Splide aria-label="Фотографии города" options={splideOptions}>
+      <Splide aria-label="Фотографии города" options={splideOptions} extensions={{ AutoScroll }}>
         <SplideSlide>
           <img src={img1} alt="Фотография города" />
         </SplideSlide>

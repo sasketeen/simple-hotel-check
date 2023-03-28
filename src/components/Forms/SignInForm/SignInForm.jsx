@@ -1,15 +1,35 @@
 import Input from "@/ui/Input/Input";
 import MainButton from "@/ui/MainButton/MainButton";
 
-export default function SignInForm() {
+import "./SignInForm.css";
+
+import useForm from "@/hooks/useForm";
+import useValidation from "@/hooks/useValidation";
+
+export default function SignInForm({handleSignIn}) {
+  const [handleValidation, errors] = useValidation();
+  const { values, handleChange } = useForm({ email: "", password: "" });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if(event.target.checkValidity()) handleSignIn()
+  };
+
   return (
-    <form className="sign-in-form" noValidate>
+    <form className="sign-in-form" noValidate onSubmit={handleSubmit}>
       <Input
         id="email"
         label="Логин"
         type="email"
         required
-        onChange={() => {
+        value={values.email}
+        errorMessage={errors.email}
+        onChange={(event) => {
+          handleChange(event);
+
+        }}
+        onBlur={(event) => {
+          handleValidation(event);
         }}
       />
       <Input
@@ -18,7 +38,14 @@ export default function SignInForm() {
         type="password"
         minLength="8"
         required
-        onChange={() => {
+        value={values.password}
+        errorMessage={errors.password}
+        onChange={(event) => {
+          handleChange(event);
+
+        }}
+        onBlur={(event) => {
+          handleValidation(event);
         }}
       />
       <div className="submit-button-wrapper">

@@ -3,11 +3,9 @@ import SearchForm from "@c/Forms/SearchForm/SearchForm";
 import FavoritesCardContent from "@c/FavoritesCardContent/FavoritesCardContent";
 import ResultsCardContent from "@c/ResultsCardContent/ResultsCardContent";
 
-import "@splidejs/react-splide/css";
 import "./SearchMainContent.css";
 
 import { useState } from "react";
-import { getCurrentDate } from "@/utils/getCurrentDate";
 
 export default function SearchMainContent() {
   const [hotels, setHotels] = useState([
@@ -189,13 +187,13 @@ export default function SearchMainContent() {
   ]);
 
   const [city, setCity] = useState("Москва");
-  const [date, setDate] = useState(getCurrentDate());
-  const [duration, setDuration] = useState(1);
+  // const [date, setDate] = useState(getCurrentDate());
+  // const [duration, setDuration] = useState(1);
 
   return (
     <div className="content">
       <Card className="content__form-card">
-        <SearchForm city={city} date={date} duration={duration}></SearchForm>
+        <SearchForm></SearchForm>
       </Card>
 
       <Card className="content__favorites favorites">
