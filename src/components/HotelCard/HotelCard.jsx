@@ -10,6 +10,8 @@ export default function HotelCard({
   rating,
   price,
   noImage,
+  isFavorite,
+  handleLike,
 }) {
   return (
     <div className="hotel-card">
@@ -29,7 +31,8 @@ export default function HotelCard({
         <div className="hotel-card__button-wrapper">
           <button
             aria-label="Добавить в избранное"
-            className="hotel-card__like"
+            className={`hotel-card__like ${isFavorite ? 'hotel-card__like_active': ''}`}
+            onClick={handleLike}
           >
             <svg
               width="21"

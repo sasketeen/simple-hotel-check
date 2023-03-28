@@ -1,16 +1,26 @@
-import HotelCard from "@c/HotelCard/HotelCard";
-import HotelsCardsList from "@c/HotelsCardsList/HotelsCardsList";
+import { useDispatch, useSelector } from "react-redux";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 
+import HotelCard from "@c/HotelCard/HotelCard";
+import HotelsCardsList from "@c/HotelsCardsList/HotelsCardsList";
+
 import { getCurrentDate, getPrettyCurrentDate } from "@/utils/getCurrentDate";
 import { declineWord } from "@/utils/declineWord";
+
+import { selectHotelsData, selectFavoriteHotels, updateFavoriteHotels } from "@/store/hotelsSlice";
+
 
 import "@splidejs/react-splide/css";
 import "./ResultsCardContent.css";
 import img1 from "@/assets/images/City-img1.png";
 
-export default function ResultsCardContent({ hotels, city }) {
+export default function ResultsCardContent({ city }) {
+
+  const hotels = useSelector(selectHotelsData);
+  const favoriteHotels = useSelector(selectFavoriteHotels);
+  const dispatch = useDispatch();
+
   const splideOptions = {
     type: "loop",
     drag: "free",
@@ -36,6 +46,8 @@ export default function ResultsCardContent({ hotels, city }) {
           duration="20"
           rating={hotel.stars}
           price={hotel.priceFrom}
+          isFavorite={hotel.isFavorite}
+          handleLike={() => dispatch(updateFavoriteHotels(hotel))}
         ></HotelCard>
       </li>
     );
@@ -68,7 +80,7 @@ export default function ResultsCardContent({ hotels, city }) {
       <div className="favorites-info-wrapper">
         <p className="favorites-info">
           Добавлено в Избранное:
-          <span className="favorites-count">{hotels.length}</span>{" "}
+          <span className="favorites-count">{favoriteHotels.length}</span>{" "}
           {declineWord(hotels.length, ["отель", "отеля", "отелей"])}
         </p>
       </div>

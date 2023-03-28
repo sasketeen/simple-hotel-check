@@ -1,13 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getPrettyCurrentDate } from "@/utils/getCurrentDate";
 import HotelCard from "@c/HotelCard/HotelCard";
 import HotelsCardsList from "@c/HotelsCardsList/HotelsCardsList";
 import "./FavoritesCardContent.css";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFavoriteHotels, updateFavoriteHotels } from "../../store/hotelsSlice";
 
-export default function FavoritesCardContent({ hotels }) {
+export default function FavoritesCardContent() {
   const [sortAscending, setSortAscending] = useState(true);
   const [sortMethod, setSortMethod] = useState("byRating");
   const [sortedHotels, setSortedHotels] = useState([]);
+
+  const favoriteHotels = useSelector(selectFavoriteHotels);
+  const dispatch = useDispatch();
 
   /**
    * Если нажимается клавиша активного метода сортировки, то переключаем способ с возрастания на убывание или наоборот
@@ -28,24 +33,24 @@ export default function FavoritesCardContent({ hotels }) {
     if (sortMethod === "byPrice") {
       if (sortAscending)
         setSortedHotels(
-          [...hotels].sort((a, b) => (a.priceFrom >= b.priceFrom ? 1 : -1))
+          [...favoriteHotels].sort((a, b) => (a.priceFrom >= b.priceFrom ? 1 : -1))
         );
       else
         setSortedHotels(
-          [...hotels].sort((a, b) => (a.priceFrom <= b.priceFrom ? 1 : -1))
+          [...favoriteHotels].sort((a, b) => (a.priceFrom <= b.priceFrom ? 1 : -1))
         );
     }
     if (sortMethod === "byRating") {
       if (sortAscending)
         setSortedHotels(
-          [...hotels].sort((a, b) => (a.stars >= b.stars ? 1 : -1))
+          [...favoriteHotels].sort((a, b) => (a.stars >= b.stars ? 1 : -1))
         );
       else
         setSortedHotels(
-          [...hotels].sort((a, b) => (a.stars <= b.stars ? 1 : -1))
+          [...favoriteHotels].sort((a, b) => (a.stars <= b.stars ? 1 : -1))
         );
     }
-  }, [sortMethod, sortAscending, hotels]);
+  }, [sortMethod, sortAscending, favoriteHotels]);
 
   const hotelsCards = sortedHotels.map((hotel) => {
     return (
@@ -57,6 +62,8 @@ export default function FavoritesCardContent({ hotels }) {
           rating={hotel.stars}
           price={hotel.priceFrom}
           noImage
+          handleLike={() => dispatch(updateFavoriteHotels(hotel))}
+          isFavorite={hotel.isFavorite}
         ></HotelCard>
       </li>
     );
