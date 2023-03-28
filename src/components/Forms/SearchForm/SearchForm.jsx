@@ -3,6 +3,7 @@ import MainButton from "@/ui/MainButton/MainButton";
 
 import { getCurrentDate } from "@/utils/getCurrentDate";
 import useForm from "@/hooks/useForm";
+import useValidation from "@/hooks/useValidation";
 
 import "./SearchForm.css";
 
@@ -12,6 +13,7 @@ export default function SearchForm() {
     date: getCurrentDate(),
     duration: 1,
   });
+  const [handleValidation, errors] = useValidation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,8 +27,10 @@ export default function SearchForm() {
         id="location"
         required
         labelBold
+        errorMessage={errors.location}
         onChange={(event) => {
           handleChange(event);
+          handleValidation(event)
         }}
       />
       <Input
@@ -37,8 +41,10 @@ export default function SearchForm() {
         min={getCurrentDate()}
         required
         labelBold
+        errorMessage={errors.date}
         onChange={(event) => {
           handleChange(event);
+          handleValidation(event)
         }}
       />
       <Input
@@ -49,10 +55,11 @@ export default function SearchForm() {
         step="1"
         min="1"
         required
-        pattern="^[ 0-9]+$"
         labelBold
+        errorMessage={errors.duration}
         onChange={(event) => {
           handleChange(event);
+          handleValidation(event)
         }}
       />
 
