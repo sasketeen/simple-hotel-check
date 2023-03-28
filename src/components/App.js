@@ -1,24 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate, Route, Routes } from "react-router-dom";
-import Auth from './Auth/Auth';
-import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
-import Search from './Search/Search';
+import { setLogin } from '@/store/userSlice';
+import Auth from '@c/Auth/Auth';
+import ProtectedRoute from '@c/ProtectedRoute/ProtectedRoute';
+import Search from '@c/Search/Search';
 
 function App() {
   const navigate = useNavigate();
-  const [isUserSignIn, setIsUserSignIn] = useState(false);
-
-  const handleSignIn = () => {
-    localStorage.setItem("logined", true);
-    setIsUserSignIn(true);
-    navigate("/simple-hotel-check/");
-  }
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const isSignIn = localStorage.getItem("logined");
     if (isSignIn) {
-      setIsUserSignIn(true);
       navigate("/simple-hotel-check/", { replace: true });
+      dispatch(setLogin())
     }
   }, [navigate]);
 
@@ -28,14 +24,13 @@ function App() {
         path="/simple-hotel-check/"
         element={
           <ProtectedRoute
-            isSignIn={isUserSignIn}
             element={Search}
           />
         }
       />
       <Route
         path="/simple-hotel-check/auth"
-        element={<Auth handleSignIn={handleSignIn} />}
+        element={<Auth/>}
       />
     </Routes>
   );

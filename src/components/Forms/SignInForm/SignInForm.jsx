@@ -1,3 +1,8 @@
+
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setLogin, setUserData } from "@/store/userSlice";
+
 import Input from "@/ui/Input/Input";
 import MainButton from "@/ui/MainButton/MainButton";
 
@@ -6,13 +11,21 @@ import "./SignInForm.css";
 import useForm from "@/hooks/useForm";
 import useValidation from "@/hooks/useValidation";
 
-export default function SignInForm({handleSignIn}) {
+export default function SignInForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [handleValidation, errors] = useValidation();
   const { values, handleChange } = useForm({ email: "", password: "" });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(event.target.checkValidity()) handleSignIn()
+    if(event.target.checkValidity()) {
+      localStorage.setItem("logined", true);
+      dispatch(setLogin())
+      dispatch(setUserData({email: values.email}))
+      navigate("/simple-hotel-check/");
+    }
   };
 
   return (
