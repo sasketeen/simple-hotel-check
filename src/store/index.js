@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
 
-import mySaga from "../sagas";
+import mySaga from "../sagas/index";
 
-import userReducer from '@/store/userSlice';
-import hotelsReducer from "@/store/hotelsSlice";
+import userReducer from './userSlice';
+import hotelsReducer from "./hotelsSlice";
 
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [sagaMiddleware]
