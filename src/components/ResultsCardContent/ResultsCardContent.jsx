@@ -78,7 +78,7 @@ export default function ResultsCardContent() {
       >
         {cityimages.map((image) => {
           return (
-            <SplideSlide>
+            <SplideSlide key={image}>
               <img src={image} alt="Фотография города" />
             </SplideSlide>
           );
