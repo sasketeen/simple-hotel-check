@@ -4,17 +4,9 @@ import FavoritesCardContent from "@c/FavoritesCardContent/FavoritesCardContent";
 import ResultsCardContent from "@c/ResultsCardContent/ResultsCardContent";
 
 import "./SearchMainContent.css";
-import { useDispatch, useSelector } from "react-redux";
-import { selectHotelsData } from "@/store/hotelsSlice";
 
-import { useState } from "react";
 
 export default function SearchMainContent() {
-
-  const [city] = useState("Москва");
-
-  // const hotels = useSelector(selectHotelsData);
-  const dispatch = useDispatch()
 
   return (
     <div className="content">
@@ -27,7 +19,7 @@ export default function SearchMainContent() {
       </Card>
 
       <Card className="content__results">
-        <ResultsCardContent city={city} />
+        <ResultsCardContent />
       </Card>
     </div>
   );

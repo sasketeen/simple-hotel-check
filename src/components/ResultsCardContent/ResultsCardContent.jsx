@@ -5,20 +5,20 @@ import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import HotelCard from "@c/HotelCard/HotelCard";
 import HotelsCardsList from "@c/HotelsCardsList/HotelsCardsList";
 
-import { getCurrentDate, getPrettyCurrentDate } from "@/utils/getCurrentDate";
+import { getPrettyDate } from "@/utils/formatDate";
 import { declineWord } from "@/utils/declineWord";
 
-import { selectHotelsData, selectFavoriteHotels, updateFavoriteHotels } from "@/store/hotelsSlice";
-
+import { selectHotelsData, selectFavoriteHotels, updateFavoriteHotels, selectSearchingParams } from "@/store/hotelsSlice";
 
 import "@splidejs/react-splide/css";
 import "./ResultsCardContent.css";
 import img1 from "@/assets/images/City-img1.png";
 
-export default function ResultsCardContent({ city }) {
+export default function ResultsCardContent() {
 
   const hotels = useSelector(selectHotelsData);
   const favoriteHotels = useSelector(selectFavoriteHotels);
+  const searchingParams = useSelector(selectSearchingParams)
   const dispatch = useDispatch();
 
   const splideOptions = {
@@ -37,13 +37,13 @@ export default function ResultsCardContent({ city }) {
     }
   };
 
-  const hotelsCards = hotels.map((hotel) => {
+  const hotelsCards = hotels?.map((hotel) => {
     return (
       <li key={hotel.hotelId} className="card-list__item">
         <HotelCard
           name={hotel.hotelName}
-          date={getPrettyCurrentDate()}
-          duration="20"
+          date={getPrettyDate(hotel.queryParams.checkIn)}
+          duration={hotel.queryParams.duration}
           rating={hotel.stars}
           price={hotel.priceFrom}
           isFavorite={hotel.isFavorite}
@@ -58,10 +58,10 @@ export default function ResultsCardContent({ city }) {
       <div className="results__heading">
         <div className="title-wrapper">
           <h2 className="heading__title">Отели</h2>
-          <p className="results__city">{city}</p>
+          <p className="results__city">{searchingParams.location}</p>
         </div>
-        <time className="results__date" dateTime={getCurrentDate()}>
-          {getPrettyCurrentDate()}
+        <time className="results__date" dateTime={searchingParams.date}>
+          {getPrettyDate(searchingParams.date)}
         </time>
       </div>
 
@@ -81,7 +81,7 @@ export default function ResultsCardContent({ city }) {
         <p className="favorites-info">
           Добавлено в Избранное:
           <span className="favorites-count">{favoriteHotels.length}</span>{" "}
-          {declineWord(hotels.length, ["отель", "отеля", "отелей"])}
+          {declineWord(favoriteHotels.length, ["отель", "отеля", "отелей"])}
         </p>
       </div>
 

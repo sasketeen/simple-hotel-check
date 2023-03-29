@@ -1,211 +1,50 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  hotelsData: [
-    {
-      location: {
-        country: "Russia",
-        geo: {
-          lon: 37.617508,
-          lat: 55.752041,
-        },
-        state: null,
-        name: "Moscow",
-      },
-      priceAvg: 60897.74,
-      pricePercentile: {
-        3: 28863.56,
-        10: 28863.56,
-        35: 47805.27,
-        50: 59531.09,
-        75: 65435,
-        99: 120128.17,
-      },
-      hotelName: "Mercure Arbat Moscow",
-      stars: 2,
-      locationId: 12153,
-      hotelId: 333561,
-      priceFrom: 23.56,
-      isFavorite: false,
-    },
-    {
-      location: {
-        country: "Russia",
-        geo: {
-          lon: 37.617508,
-          lat: 55.752041,
-        },
-        state: null,
-        name: "Moscow",
-      },
-      priceAvg: 60897.74,
-      pricePercentile: {
-        3: 28863.56,
-        10: 28863.56,
-        35: 47805.27,
-        50: 59531.09,
-        75: 65435,
-        99: 120128.17,
-      },
-      hotelName: "Mercure Arbat Moscow",
-      stars: 2,
-      locationId: 12153,
-      hotelId: 3323561,
-      priceFrom: 23.56,
-      isFavorite: false,
-    },
-    {
-      location: {
-        country: "Russia",
-        geo: {
-          lon: 37.617508,
-          lat: 55.752041,
-        },
-        state: null,
-        name: "Moscow",
-      },
-      priceAvg: 60897.74,
-      pricePercentile: {
-        3: 28863.56,
-        10: 28863.56,
-        35: 47805.27,
-        50: 59531.09,
-        75: 65435,
-        99: 120128.17,
-      },
-      hotelName: "Mercure Arbat Moscow",
-      stars: 2,
-      locationId: 12153,
-      hotelId: 331561,
-      priceFrom: 23.56,
-      isFavorite: false,
-    },
-    {
-      location: {
-        country: "Russia",
-        geo: {
-          lon: 37.617508,
-          lat: 55.752041,
-        },
-        state: null,
-        name: "Moscow",
-      },
-      priceAvg: 60897.74,
-      pricePercentile: {
-        3: 28863.56,
-        10: 28863.56,
-        35: 47805.27,
-        50: 59531.09,
-        75: 65435,
-        99: 120128.17,
-      },
-      hotelName: "Mercure Arbat Moscow",
-      stars: 2,
-      locationId: 12153,
-      hotelId: 313561,
-      priceFrom: 23.56,
-      isFavorite: false,
-    },
-    {
-      location: {
-        country: "Russia",
-        geo: {
-          lon: 37.617508,
-          lat: 55.752041,
-        },
-        state: null,
-        name: "Moscow",
-      },
-      priceAvg: 60897.74,
-      pricePercentile: {
-        3: 28863.56,
-        10: 28863.56,
-        35: 47805.27,
-        50: 59531.09,
-        75: 65435,
-        99: 120128.17,
-      },
-      hotelName: "Mercure Arbat Moscow",
-      stars: 2,
-      locationId: 12153,
-      hotelId: 3332561,
-      priceFrom: 243.56,
-      isFavorite: false,
-    },
-    {
-      location: {
-        country: "Russia",
-        geo: {
-          lon: 37.617508,
-          lat: 55.752041,
-        },
-        state: null,
-        name: "Moscow",
-      },
-      priceAvg: 60897.74,
-      pricePercentile: {
-        3: 28863.56,
-        10: 28863.56,
-        35: 47805.27,
-        50: 59531.09,
-        75: 65435,
-        99: 120128.17,
-      },
-      hotelName: "Mercure Arbat Moscow",
-      stars: 0,
-      locationId: 12153,
-      hotelId: 333562,
-      priceFrom: 283.56,
-      isFavorite: false,
-    },
-    {
-      location: {
-        country: "Russia",
-        geo: {
-          lon: 37.617508,
-          lat: 55.752041,
-        },
-        state: null,
-        name: "Moscow",
-      },
-      priceAvg: 60897.74,
-      pricePercentile: {
-        3: 28863.56,
-        10: 28863.56,
-        35: 47805.27,
-        50: 59531.09,
-        75: 65435,
-        99: 120128.17,
-      },
-      hotelName: "Mercure Arbat Moscow",
-      stars: 5,
-      locationId: 12153,
-      hotelId: 333563,
-      priceFrom: 2883.56,
-      isFavorite: false,
-    },
-  ],
-  favoriteHotels: []
+  hotelsData: [],
+  favoriteHotels: [],
+  searchingParams: {}
 }
 
-export const hotelsSice = createSlice({
+export const hotelsSlice = createSlice({
   name: 'hotels',
   initialState,
   reducers: {
     updateFavoriteHotels: (state, action) => {
-      state.hotel = state.hotelsData.forEach(hotel => {
+      console.log(state.favoriteHotels)
+      state.hotelsData = state.hotelsData.map(hotel => {
         if (hotel.hotelId === action.payload.hotelId) {
           hotel.isFavorite = !hotel.isFavorite
+          console.log(hotel.isFavorite)
+          if (hotel.isFavorite) {
+            console.log(2222)
+            state.favoriteHotels = [...state.favoriteHotels, hotel]
+          }
+          else {
+            console.log(1111)
+            console.log(hotel.isFavorite)
+            state.favoriteHotels = state.favoriteHotels.filter(h => h.isFavorite)
+          }
         }
+        return hotel
       })
-      state.favoriteHotels = state.hotelsData.filter(hotel => hotel.isFavorite)
+
+
     },
+    updateSearchingParams: (state, action) => {
+      state.searchingParams = {...state.searchingParams, ...action.payload}
+    },
+    getHotels: (state, action) => {
+      state.hotelsData = action.payload;
+      console.log(state.hotelsData.hotels)
+    }
   }
 })
 
-export const { updateFavoriteHotels } = hotelsSice.actions;
+export const { updateFavoriteHotels, updateSearchingParams, getHotels } = hotelsSlice.actions;
 
 export const selectHotelsData = (state) => state.hotels.hotelsData;
 export const selectFavoriteHotels = (state) => state.hotels.favoriteHotels;
+export const selectSearchingParams = (state) => state.hotels.searchingParams;
 
-export default hotelsSice.reducer;
+export default hotelsSlice.reducer;

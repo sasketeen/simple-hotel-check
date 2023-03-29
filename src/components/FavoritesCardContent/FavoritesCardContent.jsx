@@ -1,21 +1,25 @@
-import { useEffect, useMemo, useState } from "react";
-import { getPrettyCurrentDate } from "@/utils/getCurrentDate";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getPrettyDate } from "@/utils/formatDate";
 import HotelCard from "@c/HotelCard/HotelCard";
 import HotelsCardsList from "@c/HotelsCardsList/HotelsCardsList";
+
 import "./FavoritesCardContent.css";
-import { useDispatch, useSelector } from "react-redux";
-import { selectFavoriteHotels, updateFavoriteHotels } from "../../store/hotelsSlice";
+import { selectFavoriteHotels, updateFavoriteHotels, selectSearchingParams } from "@/store/hotelsSlice";
 
 export default function FavoritesCardContent() {
+
   const [sortAscending, setSortAscending] = useState(true);
   const [sortMethod, setSortMethod] = useState("byRating");
   const [sortedHotels, setSortedHotels] = useState([]);
 
   const favoriteHotels = useSelector(selectFavoriteHotels);
+  const searchingParams = useSelector(selectSearchingParams);
   const dispatch = useDispatch();
 
   /**
-   * Если нажимается клавиша активного метода сортировки, то переключаем способ с возрастания на убывание или наоборот
+   * Если нажимается клавиша активного метода сортировки, то переключаем способ с возрастания на убывание и наоборот
    */
   const toggleSortAscending = (event) => {
     if (event.currentTarget.previousSibling.checked)
@@ -57,8 +61,8 @@ export default function FavoritesCardContent() {
       <li key={hotel.hotelId} className="card-list__item">
         <HotelCard
           name={hotel.hotelName}
-          date={getPrettyCurrentDate()}
-          duration="20"
+          date={getPrettyDate(hotel.queryParams.checkIn)}
+          duration={hotel.queryParams.duration}
           rating={hotel.stars}
           price={hotel.priceFrom}
           noImage
@@ -123,8 +127,11 @@ export default function FavoritesCardContent() {
           </label>
         </li>
       </ul>
+      {favoriteHotels.length === 0
+        ? <p className="favorites__list-caption">Пока тут пусто, но Вы можете это исправить</p>
+        : <HotelsCardsList>{hotelsCards}</HotelsCardsList>
+      }
 
-      <HotelsCardsList>{hotelsCards}</HotelsCardsList>
     </>
   );
 }
