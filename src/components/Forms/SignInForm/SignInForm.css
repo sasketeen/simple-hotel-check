@@ -1,0 +1,11 @@
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.submit-button-wrapper {
+  width: 100%;
+  padding-top: 8px;
+}

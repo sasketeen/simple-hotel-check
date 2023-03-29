@@ -1,0 +1,28 @@
+.content {
+  max-height: 902px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 34.35% 63.35%;
+  grid-template-areas:
+    "form results"
+    "favorites results";
+  grid-template-rows: min-content 1fr;
+}
+
+.content__form-card {
+  grid-area: form;
+}
+
+.content__favorites {
+  grid-area: favorites;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-height: 472px;
+}
+
+.content__results {
+  grid-area: results;
+  max-height: inherit;
+  padding: 48px 32px;
+}

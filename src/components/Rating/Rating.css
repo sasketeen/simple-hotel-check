@@ -1,0 +1,15 @@
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  width: 17px;
+  height: 17px;
+  background: url(@/assets/icons/star.svg) center/contain no-repeat;
+}
+
+.star_active {
+  background: url(@/assets/icons/star-active.svg) center/contain no-repeat;
+}

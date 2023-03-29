@@ -1,0 +1,121 @@
+.hotel-card {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-areas:
+    "img heading heading"
+    "img dates dates"
+    "img rating price";
+}
+
+/* картинка отеля */
+
+.hotel-card__img-wrapper {
+  grid-area: img;
+  box-sizing: border-box;
+  height: 64px;
+  width: 64px;
+  padding: 14px;
+  margin-right: 24px;
+  background: rgba(65, 82, 46, 0.05);
+  border-radius: 50%;
+}
+
+/* Заголовок карточки */
+.hotel-card__heading {
+  grid-area: heading;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hotel-card__title {
+  margin: 0;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+}
+
+.hotel-card__button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hotel-card__like {
+  cursor: pointer;
+  width: 21px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.like-icon path {
+  transition: all 0.3s;
+}
+
+.like-icon:hover path {
+  fill: #ebebeb;
+}
+
+.hotel-card__like_active .like-icon path {
+  fill: #e55858;
+  stroke: #e55858;
+}
+
+/* даты заезда */
+
+.hotel-card__date-wrapper {
+  grid-area: dates;
+  display: flex;
+  gap: 37px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+  color: #878787;
+}
+
+.hotel-card__date {
+  position: relative;
+}
+
+.hotel-card__date::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -24px;
+  width: 9px;
+  border-bottom: 1px solid #878787;
+}
+
+/* звезды отеля */
+
+.hotel-card__rating-wrapper {
+  grid-area: rating;
+  margin-top: 4px;
+}
+
+/* цена за номер */
+
+.hotel-card____price-wrapper {
+  grid-area: price;
+  display: flex;
+  gap: 17px;
+  align-items: flex-end;
+}
+
+.hotel-card__price-title {
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 18px;
+  letter-spacing: -0.408px;
+  color: #878787;
+}
+
+.hotel-card__price {
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+  color: var(--base_grey);
+}
