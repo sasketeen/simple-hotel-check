@@ -1,4 +1,3 @@
-
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogin, setUserData } from "@/store/userSlice";
@@ -20,10 +19,10 @@ export default function SignInForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(event.target.checkValidity()) {
+    if (event.target.checkValidity()) {
       localStorage.setItem("logined", true);
-      dispatch(setLogin())
-      dispatch(setUserData({email: values.email}))
+      dispatch(setLogin());
+      dispatch(setUserData({ email: values.email }));
       navigate("/simple-hotel-check/");
     }
   };
@@ -39,7 +38,6 @@ export default function SignInForm() {
         errorMessage={errors.email}
         onChange={(event) => {
           handleChange(event);
-
         }}
         onBlur={(event) => {
           handleValidation(event);
@@ -50,12 +48,13 @@ export default function SignInForm() {
         label="Пароль"
         type="password"
         minLength="8"
+        pattern="^[^а-яё]+$"
+        title="любые символы кроме кириллицы"
         required
         value={values.password}
         errorMessage={errors.password}
         onChange={(event) => {
           handleChange(event);
-
         }}
         onBlur={(event) => {
           handleValidation(event);

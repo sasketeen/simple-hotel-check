@@ -8,33 +8,37 @@ import HotelsCardsList from "@c/HotelsCardsList/HotelsCardsList";
 import { getPrettyDate } from "@/utils/formatDate";
 import { declineWord } from "@/utils/declineWord";
 
-import { selectHotelsData, selectFavoriteHotels, updateFavoriteHotels, selectSearchingParams } from "@/store/hotelsSlice";
+import {
+  selectHotelsData,
+  selectFavoriteHotels,
+  updateFavoriteHotels,
+  selectSearchingParams,
+  selectCityImages,
+} from "@/store/hotelsSlice";
 
 import "@splidejs/react-splide/css";
 import "./ResultsCardContent.css";
-import img1 from "@/assets/images/City-img1.png";
 
 export default function ResultsCardContent() {
-
   const hotels = useSelector(selectHotelsData);
   const favoriteHotels = useSelector(selectFavoriteHotels);
-  const searchingParams = useSelector(selectSearchingParams)
+  const searchingParams = useSelector(selectSearchingParams);
+  const cityimages = useSelector(selectCityImages);
   const dispatch = useDispatch();
 
   const splideOptions = {
     type: "loop",
     drag: "free",
-    perPage: 3,
+    fixedWidth:'164px',
+    gap: '12px',
     pagination: false,
     arrows: false,
-    gap: "12px",
-    autoWidth: true,
     autoScroll: {
       pauseOnHover: true,
       pauseOnFocus: true,
       rewind: false,
-      speed: 0.3
-    }
+      speed: 0.3,
+    },
   };
 
   const hotelsCards = hotels?.map((hotel) => {
@@ -47,7 +51,9 @@ export default function ResultsCardContent() {
           rating={hotel.stars}
           price={hotel.priceFrom}
           isFavorite={hotel.isFavorite}
-          handleLike={() => dispatch(updateFavoriteHotels(hotel))}
+          handleLike={() => {
+            dispatch(updateFavoriteHotels(hotel));
+          }}
         ></HotelCard>
       </li>
     );
@@ -65,16 +71,18 @@ export default function ResultsCardContent() {
         </time>
       </div>
 
-      <Splide aria-label="Фотографии города" options={splideOptions} extensions={{ AutoScroll }}>
-        <SplideSlide>
-          <img src={img1} alt="Фотография города" />
-        </SplideSlide>
-        <SplideSlide>
-          <img src={img1} alt="Фотография города" />
-        </SplideSlide>
-        <SplideSlide>
-          <img src={img1} alt="Фотография города" />
-        </SplideSlide>
+      <Splide
+        aria-label="Фотографии города"
+        options={splideOptions}
+        extensions={{ AutoScroll }}
+      >
+        {cityimages.map((image) => {
+          return (
+            <SplideSlide>
+              <img src={image} alt="Фотография города" />
+            </SplideSlide>
+          );
+        })}
       </Splide>
 
       <div className="favorites-info-wrapper">
@@ -84,8 +92,11 @@ export default function ResultsCardContent() {
           {declineWord(favoriteHotels.length, ["отель", "отеля", "отелей"])}
         </p>
       </div>
-
-      <HotelsCardsList>{hotelsCards}</HotelsCardsList>
+      {hotels.length === 0 ? (
+        <p className="result-caption">Отелей нет</p>
+      ) : (
+        <HotelsCardsList>{hotelsCards}</HotelsCardsList>
+      )}
     </>
   );
 }

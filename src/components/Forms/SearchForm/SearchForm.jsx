@@ -37,18 +37,19 @@ export default function SearchForm() {
         duration: values.duration,
       },
     });
-  }
+    dispatch(updateSearchingParams(values));
+  };
 
   useEffect(() => {
     dispatch(updateSearchingParams(values));
-    makeDispatch()
+    makeDispatch();
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (event.target.checkValidity()) {
-      makeDispatch()
+      makeDispatch();
     }
   };
   return (

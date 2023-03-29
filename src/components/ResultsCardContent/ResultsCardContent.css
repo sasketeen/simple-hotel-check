@@ -67,3 +67,17 @@
   padding-bottom: 0;
   border-bottom: none;
 }
+.result-caption {
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+  color: #878787;
+  margin: auto;
+}
+
+.splide__slide img{
+  width: 100%;
+  height: 149px;
+  object-fit: cover;
+  border-radius: 10px;
+}

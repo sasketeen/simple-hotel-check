@@ -8,9 +8,9 @@ export default function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("logined");
-    dispatch(setLogout())
-    dispatch(setUserData({}))
-  }
+    dispatch(setLogout());
+    dispatch(setUserData({}));
+  };
 
   return (
     <header className="header">

@@ -6,16 +6,17 @@ import HotelCard from "@c/HotelCard/HotelCard";
 import HotelsCardsList from "@c/HotelsCardsList/HotelsCardsList";
 
 import "./FavoritesCardContent.css";
-import { selectFavoriteHotels, updateFavoriteHotels, selectSearchingParams } from "@/store/hotelsSlice";
+import {
+  selectFavoriteHotels,
+  updateFavoriteHotels,
+} from "@/store/hotelsSlice";
 
 export default function FavoritesCardContent() {
-
   const [sortAscending, setSortAscending] = useState(true);
   const [sortMethod, setSortMethod] = useState("byRating");
   const [sortedHotels, setSortedHotels] = useState([]);
 
   const favoriteHotels = useSelector(selectFavoriteHotels);
-  const searchingParams = useSelector(selectSearchingParams);
   const dispatch = useDispatch();
 
   /**
@@ -37,11 +38,15 @@ export default function FavoritesCardContent() {
     if (sortMethod === "byPrice") {
       if (sortAscending)
         setSortedHotels(
-          [...favoriteHotels].sort((a, b) => (a.priceFrom >= b.priceFrom ? 1 : -1))
+          [...favoriteHotels].sort((a, b) =>
+            a.priceFrom >= b.priceFrom ? 1 : -1
+          )
         );
       else
         setSortedHotels(
-          [...favoriteHotels].sort((a, b) => (a.priceFrom <= b.priceFrom ? 1 : -1))
+          [...favoriteHotels].sort((a, b) =>
+            a.priceFrom <= b.priceFrom ? 1 : -1
+          )
         );
     }
     if (sortMethod === "byRating") {
@@ -58,7 +63,15 @@ export default function FavoritesCardContent() {
 
   const hotelsCards = sortedHotels.map((hotel) => {
     return (
-      <li key={hotel.hotelId} className="card-list__item">
+      //объяснение, почему нельзя использовать в данном кейсе просто hotelId в key
+      //если в избранное добавить отель, затем поменять дату заезда в запросе и добавить в избранное этот же отель, то у них будет одинаковый key, что создаст конфликт
+      //связка hotelId + дата заезда + длительность позволяет создать более уникальный key для одного и того же отеля но с разными параметрами заезда
+      <li
+        key={
+          hotel.hotelId + hotel.queryParams.checkIn + hotel.queryParams.duration
+        }
+        className="card-list__item"
+      >
         <HotelCard
           name={hotel.hotelName}
           date={getPrettyDate(hotel.queryParams.checkIn)}
@@ -127,11 +140,13 @@ export default function FavoritesCardContent() {
           </label>
         </li>
       </ul>
-      {favoriteHotels.length === 0
-        ? <p className="favorites__list-caption">Пока тут пусто, но Вы можете это исправить</p>
-        : <HotelsCardsList>{hotelsCards}</HotelsCardsList>
-      }
-
+      {favoriteHotels.length === 0 ? (
+        <p className="favorites__list-caption">
+          Пока тут пусто, но Вы можете это исправить
+        </p>
+      ) : (
+        <HotelsCardsList>{hotelsCards}</HotelsCardsList>
+      )}
     </>
   );
 }

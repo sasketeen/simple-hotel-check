@@ -31,7 +31,7 @@ function App() {
       />
       <Route
         path="/simple-hotel-check/auth"
-        element={<Auth/>}
+        element={<Auth />}
       />
     </Routes>
   );

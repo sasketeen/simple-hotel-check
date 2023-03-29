@@ -1,42 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit'
+import img1 from '@/assets/images/City-img1.jpeg'
+import img2 from '@/assets/images/City-img2.jpeg'
+import img3 from '@/assets/images/City-img3.jpeg'
+import img4 from '@/assets/images/City-img4.jpeg'
 
 const initialState = {
   hotelsData: [],
   favoriteHotels: [],
-  searchingParams: {}
+  searchingParams: {},
+  cityImg: [img1, img2, img3, img4]
 }
 
 export const hotelsSlice = createSlice({
   name: 'hotels',
   initialState,
   reducers: {
+
     updateFavoriteHotels: (state, action) => {
-      console.log(state.favoriteHotels)
-      state.hotelsData = state.hotelsData.map(hotel => {
+      state.hotelsData = state.hotelsData.map((hotel) => {
         if (hotel.hotelId === action.payload.hotelId) {
-          hotel.isFavorite = !hotel.isFavorite
-          console.log(hotel.isFavorite)
+          hotel.isFavorite = !hotel.isFavorite;
           if (hotel.isFavorite) {
-            console.log(2222)
             state.favoriteHotels = [...state.favoriteHotels, hotel]
           }
           else {
-            console.log(1111)
-            console.log(hotel.isFavorite)
-            state.favoriteHotels = state.favoriteHotels.filter(h => h.isFavorite)
+            state.favoriteHotels = state.favoriteHotels.filter((favoriteHotel) => favoriteHotel.hotelId !== hotel.hotelId)
           }
         }
         return hotel
       })
-
-
     },
+
     updateSearchingParams: (state, action) => {
-      state.searchingParams = {...state.searchingParams, ...action.payload}
+      state.searchingParams = { ...state.searchingParams, ...action.payload }
     },
+
     getHotels: (state, action) => {
       state.hotelsData = action.payload;
-      console.log(state.hotelsData.hotels)
     }
   }
 })
@@ -46,5 +46,6 @@ export const { updateFavoriteHotels, updateSearchingParams, getHotels } = hotels
 export const selectHotelsData = (state) => state.hotels.hotelsData;
 export const selectFavoriteHotels = (state) => state.hotels.favoriteHotels;
 export const selectSearchingParams = (state) => state.hotels.searchingParams;
+export const selectCityImages = (state) => state.hotels.cityImg;
 
 export default hotelsSlice.reducer;
