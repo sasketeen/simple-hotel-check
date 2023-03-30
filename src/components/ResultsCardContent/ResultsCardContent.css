@@ -9,6 +9,7 @@
   display: flex;
   align-items: baseline;
   gap: 48px;
+  max-width: 65%;
 }
 
 .heading__title {
@@ -34,6 +35,9 @@
   font-weight: 500;
   font-size: 32px;
   line-height: 38px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .results__date {
