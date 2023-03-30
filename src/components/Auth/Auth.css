@@ -1,5 +1,6 @@
 .auth-layout {
   display: flex;
+  position: relative;
   flex-direction: column;
   height: 100dvh;
   background: url("@/assets/images/auth-background.jpg") center/cover no-repeat;
