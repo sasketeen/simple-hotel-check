@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/simple-hotel-check/static/css/main.ea4915e8.css",
-    "main.js": "/simple-hotel-check/static/js/main.7e57eb6a.js",
+    "main.css": "/simple-hotel-check/static/css/main.32109227.css",
+    "main.js": "/simple-hotel-check/static/js/main.67589e31.js",
     "static/js/787.3c9828e8.chunk.js": "/simple-hotel-check/static/js/787.3c9828e8.chunk.js",
     "static/media/auth-background.jpg": "/simple-hotel-check/static/media/auth-background.4639d484eb4196c12664.jpg",
     "static/media/Roboto-Medium.ttf": "/simple-hotel-check/static/media/Roboto-Medium.7c8d04cd831df3033c8a.ttf",
@@ -19,12 +19,12 @@
     "static/media/arrows-deactive.svg": "/simple-hotel-check/static/media/arrows-deactive.2d7c648b52e9b4803026.svg",
     "static/media/arrows-active.svg": "/simple-hotel-check/static/media/arrows-active.e49df68d47a066606389.svg",
     "static/media/right-arrow.svg": "/simple-hotel-check/static/media/right-arrow.ecfc16f7a5f0685dc819.svg",
-    "main.ea4915e8.css.map": "/simple-hotel-check/static/css/main.ea4915e8.css.map",
-    "main.7e57eb6a.js.map": "/simple-hotel-check/static/js/main.7e57eb6a.js.map",
+    "main.32109227.css.map": "/simple-hotel-check/static/css/main.32109227.css.map",
+    "main.67589e31.js.map": "/simple-hotel-check/static/js/main.67589e31.js.map",
     "787.3c9828e8.chunk.js.map": "/simple-hotel-check/static/js/787.3c9828e8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ea4915e8.css",
-    "static/js/main.7e57eb6a.js"
+    "static/css/main.32109227.css",
+    "static/js/main.67589e31.js"
   ]
 }
